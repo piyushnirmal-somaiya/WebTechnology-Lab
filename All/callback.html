@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callback Function</title>
+    <script>
+        //11.callback Function
+        function functionAsParameterTO(callback){
+            console.log("welcome to the functionAsParameter()");
+
+            return callback();
+
+        }
+
+        function functionAsParameterTO(callback){
+            console.log("*******Execution Started*******");
+
+            console.log("welcome to the functionAsParameter()");
+            setTimeout(callback,3000);
+
+            console.log("*******Execution Ended*******");
+
+
+        }
+
+        function wish(){
+            console.log("good day...!");
+        }
+        
+    </script>
+</head>
+<body>
+    <button onclick="functionAsParameter(wish)">callback Function</button>
+    <button onclick="functionAsParameterTO(wish)">time set callback Function</button>
+
+</body>
+</html>

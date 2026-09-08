@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //9.constructor fuction - variation 2
+        console.log("//9.constructor fuction - variation 2")
+        function Student(name,email,cousre){
+            this.name = name;
+            this.email = email;
+            this.cousre = cousre;
+        }
+
+        var s1 = new Student("shubham","shubham@gmail.com","MCAFY");
+        var s2 = new Student("sakshi","sakshi@gmail.com","MCAFY");
+
+        console.log(Object.keys(s1));
+        console.log(Object.values(s1));
+        console.log(Object.values(s2));
+        
+
+        // console.log("name: ",s1.name,"email: ",s1.email,"course: ",s1.cousre);
+        // console.log("name: ",s2.name,"email: ",s2.email,"course: ",s2.cousre);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

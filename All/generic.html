@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function2</title>
+    <script>
+
+        // 7.generic function
+        console.log("// 7.generic function")
+        function sum(...num){
+        var res = 0;
+            for (var i = 0;i < arguments.length;i++)
+            res += arguments[i];
+                
+            return res;
+        }
+
+        console.log("sum(11,22)= ",sum(11,22));
+        console.log("sum(11,22,33)= ",sum(11,22,33));
+        console.log("sum(11,22,33,44,55,66,77)= ",sum(11,22,33,44,55,66,77));
+        
+        console.log("//practice")
+        function sub(...num) {
+        var result = num[0];
+        for (var i = 1; i < num.length; i++) {
+        result -= num[i];
+    }
+         return result;
+}
+
+
+        console.log("sub(40-30)",sub(40,30));
+        console.log("sub(4,3,6,8)",sub(4,3,6,8));
+        console.log("sub(100,30,40,3)",sub(100,30,40,3));
+        
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

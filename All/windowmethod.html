@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Method</title>
+
+    <script>
+        // Executed only once after 5 seconds
+        setTimeout(() => {
+            console.log("setTimeout() called..!!");
+        }, 5000);
+
+        function settingInterval() {
+            document.getElementById("output").innerHTML = Date();
+        }
+
+        // Executed every 1 second
+        var timer;
+
+        function showtime() {
+            timer = setInterval(settingInterval, 1000);
+        }
+
+        function stoptime() {
+            clearInterval(timer);
+        }
+    </script>
+</head>
+
+<body>
+
+    <p id="output"></p>
+
+    <button onclick="showtime()">Start Check Date Time</button>
+    <button onclick="stoptime()">Stop Check Date Time</button>
+
+</body>
+</html>

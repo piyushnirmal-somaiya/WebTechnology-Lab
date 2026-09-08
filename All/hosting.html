@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Hoisting</title>
+
+    <script>
+        // ==========================================
+        // JAVASCRIPT HOISTING
+        // ==========================================
+
+
+        // ------------------------------------------
+        // 1. var Hoisting
+        // ------------------------------------------
+
+        console.log("----- var Hoisting -----");
+
+        console.log(a); // undefined
+
+        var a = "mcafy";
+
+        console.log(a); // mcafy
+
+
+        // ------------------------------------------
+        // 2. let Hoisting
+        // ------------------------------------------
+
+        console.log("----- let Hoisting -----");
+
+        // Uncomment the next line to see the error
+        // console.log(b);
+
+        let b = "mcafy";
+
+        console.log(b); // mcafy
+
+
+        // ------------------------------------------
+        // 3. const Hoisting
+        // ------------------------------------------
+
+        console.log("----- const Hoisting -----");
+
+        // Uncomment the next line to see the error
+        // console.log(c);
+
+        const c = "mcafy";
+
+        console.log(c); // mcafy
+
+
+        // ------------------------------------------
+        // 4. Function Declaration Hoisting
+        // ------------------------------------------
+
+        console.log("----- Function Declaration -----");
+
+        // Function can be called before declaration
+        wish();
+
+        function wish() {
+            console.log("Good Morning");
+        }
+
+
+        // ------------------------------------------
+        // 5. Function Expression with var
+        // ------------------------------------------
+
+        console.log("----- Function Expression -----");
+
+        // Do NOT run this before assignment.
+        // It will give:
+        // TypeError: expression is not a function
+
+        /*
+        expression();
+
+        var expression = function () {
+            console.log("Good Morning");
+        };
+        */
+
+        var expression = function () {
+            console.log("Good Morning from Function Expression");
+        };
+
+        expression();
+
+
+        // ------------------------------------------
+        // 6. Arrow Function with var
+        // ------------------------------------------
+
+        console.log("----- Arrow Function with var -----");
+
+        /*
+        arrow();
+
+        var arrow = () => {
+            console.log("Good Morning");
+        };
+
+        // This gives:
+        // TypeError: arrow is not a function
+        */
+
+        var arrow = () => {
+            console.log("Good Morning from Arrow Function");
+        };
+
+        arrow();
+
+
+        // ------------------------------------------
+        // 7. Arrow Function with let
+        // ------------------------------------------
+
+        console.log("----- Arrow Function with let -----");
+
+        /*
+        arrowLet();
+
+        let arrowLet = () => {
+            console.log("Good Morning");
+        };
+
+        // This gives:
+        // ReferenceError:
+        // Cannot access 'arrowLet' before initialization
+        */
+
+        let arrowLet = () => {
+            console.log("Good Morning from let Arrow Function");
+        };
+
+        arrowLet();
+
+
+        // ------------------------------------------
+        // 8. Arrow Function with const
+        // ------------------------------------------
+
+        console.log("----- Arrow Function with const -----");
+
+        /*
+        arrowConst();
+
+        const arrowConst = () => {
+            console.log("Good Morning");
+        };
+
+        // This gives:
+        // ReferenceError:
+        // Cannot access 'arrowConst' before initialization
+        */
+
+        const arrowConst = () => {
+            console.log("Good Morning from const Arrow Function");
+        };
+
+        arrowConst();
+
+
+    
+
+    </script>
+</head>
+
+<body>
+
+    <h1>JavaScript Hoisting</h1>
+
+    <p>Open the browser console to see the output.</p>
+
+</body>
+</html>

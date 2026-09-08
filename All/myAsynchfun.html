@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Asynch Fucnction</title>
+    <script>
+        //12.Asynch Fucnction 
+        async function myAsynchFunction(callback) {
+            console.log(" start-myAsynchFunction ");
+
+            //await new Promise(resolve =>setTimeout(callback,3000));
+
+            setTimeout(callback,3000);
+            setTimeout(callback,1000);
+
+            console.log(" start-myAsynchFunction ")
+        }
+         function wish(){
+            console.log("good day...!");
+        }
+        
+        
+    </script>
+</head>
+<body>
+    <button onclick="myAsynchFunction(wish)">myAsynchFunction</button>
+
+</body>
+</html>

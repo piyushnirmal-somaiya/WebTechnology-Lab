@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // window.clearInterval()
+
+        function urlOpen(){
+            window.open("https://www.google.com?q=kjsim","_blank");
+        }
+
+        function getConfirmation(){
+            if(window.confirm("Are you an mca student?"))
+                console.log("welcome mca aspirant");
+            else
+                console.log("invalid identity");
+        }
+    </script>
+</head>
+<body>
+    <button onclick="urlOpen()">google</button>
+    <button onclick="getConfirmation()">Confirm Here if MCA</button>
+</body>
+</html>

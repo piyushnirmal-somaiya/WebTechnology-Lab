@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>parameterizedand invoked</title>
+    <script>
+        //4.parameterized function
+        function wishParams(name,greetings){
+            console.log("name: ",name," greetings: ",greetings);
+        }
+
+        //5.imidietly invoked / self revoking functions
+        (function(){console.log("this function needs no explicit call and it will be called before everything !!! ")}());
+        
+        //(function(){}());
+        (function(){console.log("my name is shubham")}());
+
+        //6 default parameterized functions
+        //if users pass the value of an parameter it will be consider otherwise default vale will be consider
+        function myInfo(name = "MCAFY",org = "KJSIM",email = "kjsim@somaiya.edu"){
+            console.log("--------");
+            console.log("name: ",name,"organisation",org," email: ",email);
+            console.log("--------");
+        }
+
+        myInfo();//calling default parameterized function without any parameters/arguments
+        myInfo("shubham");//calling default parameterized function with one arg parameters/arguments
+        myInfo("shubham","KJSIM");//calling default parameterized function with two arg parameters/arguments
+        myInfo("shubham","KJSIM","sk@somaiya.edu");//calling default parameterized function with all arg parameters/arguments
+
+   </script>
+</head>
+<body>
+    <button onclick="wishParams('MCAFY','Good Morning')">call parameterized function</button>
+</body>
+</html>

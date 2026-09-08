@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>constructor</title>
+    <script>
+        //8.constructure function
+        console.log("//8.constructure function");
+        var mul = new Function('a','b','return a*b');
+
+        console.log("mul(5,7)",mul(5,7));
+        console.log("mul(55,77)",mul(55,77));
+
+        //practice
+        console.log("//practice");
+        var div = new Function('a','b','return a/b');
+
+        console.log("div(4,2)",div(4,2));
+        console.log("div(25,2)",div(25,2));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

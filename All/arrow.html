@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow</title>
+    <script>
+        
+        
+        //arrow function
+        var wishAF = () =>{
+            console.log("arrow function - good morning");
+        }
+        //arrow function types
+        // arrow function using multiple parameters
+        const wishAFP = (num1,num2,num3) => {return num1+num2+num3};
+        //const wishAFP = (num1,num2,num3) => return num1+num2+num3;
+
+        //arrow function using single parameters
+        const mysquare  = x => x*x*x;
+       
+        //function  expression
+        var wishFE = function(){
+            console.log("function expression- good morning");
+        }
+         //function  declartion 
+        function wishFD(){
+            console.log("functionn declar- good morning");
+        }
+       wishFD();
+       wishAF();
+       wishFE();
+
+        
+        
+    </script>
+</head>
+<body>
+    <button onclick="alert(wishAFP(4,4,4))">addtion</button><br><br>
+    <button onclick="alert(mysquare(4))">cube</button><br><br>
+    <button onclick="console.log(wishAFP(4,4,4))">addtion</button><br><br>
+    <button onclick="console.log(mysquare(4))">cube</button><br><br>
+    
+</body>
+</html>

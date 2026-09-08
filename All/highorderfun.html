@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>high order function</title>
+    <script>
+        //high order function
+        //fuction as a parameter or function as return value
+        console.log("//high order function")
+        function getDiscount(fun,value){
+            return fun(value);
+        }
+
+        const disc10 = (value) => value*0.1;
+        const disc20 = (value) => value*0.2;
+
+        console.log("10% discounted price: ",getDiscount(disc10,45000));
+        console.log("10% discounted price: ",getDiscount(disc20,45000));
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
