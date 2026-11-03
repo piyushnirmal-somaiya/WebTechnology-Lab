@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div ng-app="FirebaseDBApp" ng-controller="fbdbController">
+        <button ng-click="fetchStudents()">FetchRecords</button>
+
+        <hr>
+
+        <div class="card m-5 p-5">
+            <table class="table table-bordered table-striped table-hover">
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>course</th>
+                </tr>
+                <tr ng-repeat="(id, student) in students">
+                    <td>{{id}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.course}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        angular.module("FirebaseDBApp", []).controller("fbdbController", function($scope) {
+
+            $scope.students = {};
+
+            // Use professor's exact database configuration if your project is restricted
+            var firebaseConfig = {
+                apiKey: "0a8fe9f8d29de03d5e5a43594f25e4a68975ea81",
+                authDomain: "angulardbconnectivity.firebaseapp.com",
+                databaseURL: "https://angulardbconnectivity-default-rtdb.firebaseio.com",
+                projectId: "angulardbconnectivity",
+                appId: "angulardbconnectivity"
+            };
+
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+
+            $scope.fetchStudents = function() {
+                firebase.database().ref("/").once("value", function(snapshot) {
+                    $scope.students = snapshot.val();
+                    console.log(JSON.stringify($scope.students));
+                    $scope.$apply();
+                }, function(error) {
+                    console.error("Database connection error: ", error);
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>

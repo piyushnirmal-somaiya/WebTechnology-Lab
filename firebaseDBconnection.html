@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div ng-app="FirebaseDBApp" ng-controller="fbdbController">
+        <button ng-click="fetchStudents()">FetchRecords from firebase-database</button>
+    </div>
+
+    <script>
+        angular.module("FirebaseDBApp", []).controller("fbdbController", function($scope) {
+
+            $scope.students = {};
+
+            var firebaseConfig = {
+                apiKey: "AIzaSyDc6ECgtinOhozJeBE0WDYQovr0z5qhRJ0",
+                authDomain: "fir-dbconnection-a32bb.firebaseapp.com",
+                databaseURL: "https://fir-dbconnection-a32bb-default-rtdb.firebaseio.com",
+                projectId: "fir-dbconnection-a32bb",
+                storageBucket: "fir-dbconnection-a32bb.firebasestorage.app",
+                messagingSenderId: "733029397369",
+                appId: "1:733029397369:web:990bf58b0dbe107948f5a8",
+                measurementId: "G-TK17TTEL68"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+
+            $scope.fetchStudents = function() {
+                firebase.database().ref("/").once("value", function(snapshot) {
+                    $scope.students = snapshot.val();
+                    console.log(JSON.stringify($scope.students));
+                    $scope.$apply();
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
