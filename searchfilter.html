@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <div ng-app="FirebaseDBApp" ng-controller="fbdbController">
+        
+        <!-- Fetch Section -->
+        <div class="container mt-5 pt-5">
+            <button ng-click="fetchStudents()">FetchRecords</button>
+            <p class="text-danger" ng-if="error">{{error}}</p>
+            <input type="search" class="form-control" ng-model="searchText"
+                placeholder="Search by id, name, email, or course" aria-label="Search student records">
+            <hr>
+
+
+            <div class="card m-5 p-5">
+                <table class="table table-bordered table-striped table-hover">
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>course</th>
+                    </tr>
+                    <tr ng-repeat="(id, student) in students"
+                        ng-if="student.email && matchesStudent(id, student)">
+                        <td>{{id}}</td>
+                        <td>{{student.name || 'N/A'}}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.course}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <hr>
+
+
+        <!-- Insert Section -->
+        <div class="container pt-5 mt-5">
+            <form ng-submit="insertStudent()" class="form">
+                <input type="text" class="form-control" ng-model="newStudent.id" placeholder="student-id" required><br>
+                <input type="text" class="form-control" ng-model="newStudent.name" placeholder="student-name" required><br>
+                <input type="email" class="form-control" ng-model="newStudent.email" placeholder="student-email" required><br>
+                <select class="form-control" ng-model="newStudent.course" placeholder="student-course" required>
+                    <option value="" disabled selected>Select course</option>
+                    <option value="MCA">MCA</option>
+                    <option value="MBA">MBA</option>
+                    <option value="MPhill">MPhill</option>
+                    <option value="PGDBA">PGDBA</option>
+                </select><br>
+                <!-- <input class="form-control" type="submit" value="insertStudent"> -->
+                <button type="submit">insertStudent</button>
+            </form>
+
+
+            <h4>{{msg}}</h4>
+        </div>
+        <hr>
+
+
+    </div>
+
+
+    <script>
+        angular.module("FirebaseDBApp", []).controller("fbdbController", function($scope) {
+
+
+            $scope.students = {};
+            $scope.newStudent = {};
+            $scope.error = "";
+            $scope.searchText = "";
+
+            $scope.matchesStudent = function(id, student) {
+                var query = ($scope.searchText || "").trim().toLowerCase();
+                if (!query) {
+                    return true;
+                }
+
+                var searchableText = [id, student.name, student.email, student.course]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLowerCase();
+
+                return searchableText.indexOf(query) !== -1;
+            };
+
+
+            var firebaseConfig = {
+                apiKey: "AIzaSyDc6ECgtinOhozJeBE0WDYQovr0z5qhRJ0",
+                authDomain: "fir-dbconnection-a32bb.firebaseapp.com",
+                databaseURL: "https://fir-dbconnection-a32bb-default-rtdb.firebaseio.com",
+                projectId: "fir-dbconnection-a32bb",
+                storageBucket: "fir-dbconnection-a32bb.firebasestorage.app",
+                messagingSenderId: "733029397369",
+                appId: "1:733029397369:web:990bf58b0dbe107948f5a8",
+                measurementId: "G-TK17TTEL68"
+            };
+
+
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+
+
+            // Function to fetch student records
+            $scope.fetchStudents = function() {
+                $scope.error = "";
+                firebase.database().ref("/").once("value", function(snapshot) {
+                    $scope.$applyAsync(function() {
+                        $scope.students = snapshot.val() || {};
+                        console.log(JSON.stringify($scope.students));
+                    });
+                }, function(error) {
+                    console.error("Database connection error: ", error);
+                    $scope.$applyAsync(function() {
+                        $scope.error = error.message || "Could not fetch records from Firebase.";
+                    });
+                });
+            };
+
+
+            // Function to insert a new student record
+            $scope.insertStudent = function() {
+                console.log("calling insertStudent()");
+                var studentId = $scope.newStudent.id;
+                
+                firebase.database().ref("/" + studentId).set({
+                    name: $scope.newStudent.name,
+                    email: $scope.newStudent.email,
+                    course: $scope.newStudent.course
+                }, function(error) {
+                    $scope.$apply(function() {
+                        if (error) {
+                            $scope.msg = "Error inserting record!";
+                        } else {
+                            $scope.msg = "Record inserted successfully!";
+                            $scope.newStudent = {}; // Reset form fields
+                            $scope.fetchStudents(); // Refresh updated table
+                        }
+                    });
+                });
+            };
+
+
+        });
+    </script>
+</body>
+</html>
